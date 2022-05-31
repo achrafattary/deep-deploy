@@ -3,7 +3,7 @@ import os
 
 
 # Keras
-from tensorflow.keras import backend as keras
+
 
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image

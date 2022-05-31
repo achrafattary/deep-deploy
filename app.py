@@ -1,7 +1,7 @@
 
 # Flask utils
 from flask import Flask, request, render_template
-
+from tensorflow.keras.models import load_model
 
 # Define a flask app
 app = Flask(__name__)

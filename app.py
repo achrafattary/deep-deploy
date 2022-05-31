@@ -24,17 +24,7 @@ app = Flask(__name__)
 
 
 
-def model_predict(img_path):
-    MODEL_PATH = 'pre_final_model.h5'
-    model = load_model(MODEL_PATH)
-    img = image.load_img(img_path, target_size=(200, 200))
-    img = img_to_array(img)
-    img = img.reshape(1, 200, 200, 3)
-    img = img.astype('float32')
-    img = img - [123.68, 116.779, 103.939]
-    
-    preds = model.predict(img)
-    return preds
+
 
 
 @app.route('/', methods=['GET'])

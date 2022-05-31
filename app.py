@@ -17,14 +17,16 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH = 'pre_final_model.h5'
+
 
 # Load your trained model
-model = load_model(MODEL_PATH)
-print('Model loaded. Check http://127.0.0.1:5000/')
+
+
 
 
 def model_predict(img_path):
+    MODEL_PATH = 'pre_final_model.h5'
+    model = load_model(MODEL_PATH)
     img = image.load_img(img_path, target_size=(200, 200))
     img = img_to_array(img)
     img = img.reshape(1, 200, 200, 3)

@@ -41,27 +41,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/predict', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST':
-        # Get the file from post request
-        f = request.files['file']
 
-        # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(basepath, 'uploads', secure_filename(f.filename))
-        f.save(file_path)
-
-        # Make prediction
-        print("test begining")
-        preds = model_predict(file_path)
-        print("test end")
-
-        #Process your result for human       
-        if int(preds[0])  == 0:
-            return "cataract"         
-        return "normal"
-    return None
 
 
 if __name__ == '__main__':

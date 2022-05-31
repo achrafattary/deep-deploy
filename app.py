@@ -1,9 +1,7 @@
 
 # Flask utils
 from flask import Flask, request, render_template
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.preprocessing.image import img_to_array
+
 
 # Define a flask app
 app = Flask(__name__)

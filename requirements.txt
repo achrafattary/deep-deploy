@@ -1,6 +1,9 @@
 Flask==2.1.2
 gevent==21.12.0
 numpy==1.22.3
-tensorflow-cpu==2.8.0
 Werkzeug==2.1.1
 gunicorn==20.1.0
+tensorboard==2.3.0
+tensorboard-plugin-wit==1.7.0
+tensorflow==2.3.0
+tensorflow-estimator==2.3.0

@@ -1,27 +1,18 @@
-from tensorflow.keras import backend as keras
-from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.preprocessing.image import load_img
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.models import load_model
-# Flask utils
-from flask import Flask, redirect, url_for, request, render_template
-from werkzeug.utils import secure_filename
-from gevent.pywsgi import WSGIServer
+import tensorflow 
 
-# Define a flask app
-app = Flask(__name__)
+MODEL_PATH = 'pre_final_model.h5'
 
-@app.route('/', methods=['GET'])
-def index():
-    # Main page
-    return render_template('index.html')
+# Load your trained model
+model = tensorflow.keras.models.load_model(MODEL_PATH)
+print('Model loaded. Check http://127.0.0.1:5000/')
 
 
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
+def model_predict(img_path):
+    img = tensorflow.keras.preprocessing.image.load_img(img_path, target_size=(200, 200))
+    img = tensorflow.keras.preprocessing.image.img_to_array(img)
+    img = img.reshape(1, 200, 200, 3)
+    img = img.astype('float32')
+    img = img - [123.68, 116.779, 103.939]
+    
+    preds = model.predict(img)
+    return preds

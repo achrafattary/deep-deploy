@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 import os
-from deep import model_predict
+import tensorflow as tf
 # Flask utils
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
@@ -28,15 +28,7 @@ def upload():
         file_path = os.path.join(basepath, 'uploads', secure_filename(f.filename))
         f.save(file_path)
 
-        # Make prediction
-        print("test begining")
-        preds = model_predict(file_path)
-        print("test end")
-
-        #Process your result for human       
-        if int(preds[0])  == 0:
-            return "cataract"         
-        return "normal"
+       
     return None
 
 

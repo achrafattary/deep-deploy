@@ -1,13 +1,21 @@
+from __future__ import division, print_function
 import os
+from deep import model_predict
 # Flask utils
 from flask import Flask, request, render_template
+from werkzeug.utils import secure_filename
 
 # Define a flask app
 app = Flask(__name__)
+
+
+
+
 @app.route('/', methods=['GET'])
 def index():
     # Main page
     return render_template('index.html')
+
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
@@ -19,9 +27,17 @@ def upload():
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(basepath, 'uploads', secure_filename(f.filename))
         f.save(file_path)
+
+        # Make prediction
+        print("test begining")
+        preds = model_predict(file_path)
+        print("test end")
+
+        #Process your result for human       
+        if int(preds[0])  == 0:
+            return "cataract"         
+        return "normal"
     return None
-
-
 
 
 if __name__ == '__main__':
